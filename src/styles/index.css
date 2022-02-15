@@ -1,0 +1,110 @@
+body {
+    background-color: #EDF2F4;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-color {
+    background-color: #ffff;
+}
+
+.auth-card-login {
+    height: 40rem;
+    margin: 10rem auto;
+    display: flex;
+}
+
+.auth-form-login {
+    width: 60%;
+}
+
+.auth-img-login {
+    position: relative;
+    width: 40%;
+}
+
+.auth-img-login::before {
+    content: ' ';
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.507);
+    width: 100%;
+    height: 100%;
+}
+
+.titulo {
+    position: absolute;
+    background-color: #edf2f400;
+    color: #ffff;
+    display: flex;
+    width: 100%;
+    font-style: initial;
+    margin-top: 2rem;
+    font-size: 3rem;
+    justify-content: center;
+}
+
+.info {
+    position: absolute;
+    background-color: #edf2f400;
+    color: #ffff;
+    display: flex;
+    width: 100%;
+    font-style: initial;
+    margin-top: 30rem;
+    font-size: 1.8rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.img-login {
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 970px) {
+    .auth-img-login img {
+        display: none;
+    }
+
+    .auth-img-login::before {
+        width: 0;
+    }
+
+    .auth-img-login {
+        display: none;
+    }
+
+    .info {
+        display: none;
+    }
+
+    .auth-form-login {
+        width: 100%;
+    }
+}
+
+.color-letras-rojo {
+    color: #D90429;
+}
+
+.color-letras {
+    color: #EDF2F4;
+}
+
+.navbar-toggler-icon {
+    color: #ffff;
+}
+
+.form-control:focus {
+    border: 1px solid #D90429;
+    box-shadow: none;
+    background-color: #ffffff;
+}
+
+.btn-danger {
+    background-color: #D90429;
+}
+
+.img-logo-nav {
+    width: 20%;
+}
+
