@@ -1,11 +1,13 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 
 import { MainRoutes } from './routes/MainRoutes'
+import { store } from './store/store'
 
 export const Comilon = () => {
     return (
-        <div>
+        <Provider store={store}>
             <MainRoutes />
-        </div>
+        </Provider>
     )
 }

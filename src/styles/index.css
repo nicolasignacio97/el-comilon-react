@@ -6,7 +6,9 @@ body {
 .card-color {
     background-color: #ffff;
 }
-
+.link{
+    text-decoration: none;
+}
 .auth-card-login {
     height: 40rem;
     margin: 10rem auto;
