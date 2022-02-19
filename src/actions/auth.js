@@ -1,23 +1,40 @@
-import { getAuth, signInWithPopup, updateCurrentUser, updateProfile } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
 import {
     providerFacebook,
     providerGoogle,
     providerTwitter,
+    getAuth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    updateProfile,
+    signInWithPopup,
+    db,
 } from "../firebase/firebase-config";
+import { existe } from "../helpers/existeUser";
 import { types } from "../types/types";
 
-
+export const guardarUsuario = async (uid, displayName, correo) => {
+    const newUser = {
+        nombre: displayName,
+        correo: correo,
+        role: 'user'
+    }
+    if (await existe(uid)) {
+        return;
+    }
+    const document = doc(db, `users/${uid}`);
+    setDoc(document, newUser)
+}
 
 export const createUser = (email, password, name) => {
-
     return (dispath) => {
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then(async ({ user }) => {
                 await updateProfile(auth.currentUser, { displayName: name })
+                guardarUsuario(user.uid, user.displayName, user.email)
                 dispath(login(user.uid, user.displayName))
             })
             .catch(err => {
@@ -51,7 +68,8 @@ export const loginConGoogle = () => {
     return (dispath) => {
         const auth = getAuth();
         signInWithPopup(auth, providerGoogle)
-            .then(({ user }) => {
+            .then(async ({ user }) => {
+                guardarUsuario(user.uid, user.displayName, user.email)
                 dispath(login(user.uid, user.displayName))
             })
             .catch(err => {
@@ -89,5 +107,19 @@ export const login = (uid, displayName) => {
             uid,
             displayName
         }
+    }
+};
+
+export const startLogout = () => {
+    const auth = getAuth()
+    return async (dispatch) => {
+        signOut(auth);
+        dispatch(logout());
+    }
+}
+
+export const logout = () => {
+    return {
+        type: types.Logout,
     }
 };

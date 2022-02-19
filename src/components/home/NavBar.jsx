@@ -1,8 +1,15 @@
 import React from 'react'
 import '../../styles/nav.css'
 import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { startLogout } from '../../actions/auth';
 
 export const NavBar = () => {
+    const dispatch = useDispatch();
+    const { name } = useSelector(state => state.auth);
+    const handleLogout = () => {
+        dispatch(startLogout())
+    }
     return (
         <div><nav className="navbar navbar-expand-lg navbar-dark bg-danger">
             <div className="container-fluid">
@@ -20,18 +27,21 @@ export const NavBar = () => {
                         <li className="nav-item">
                             <NavLink to="/perfil" className="nav-link" aria-current="page">Perfil</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink to="/auth/login" className="nav-link" aria-current="page">registro</NavLink>
-                        </li>
-
-                        <li className="nav-item">
-                            <NavLink to="/auth/login" className="nav-link" aria-current="page">Login</NavLink>
-                        </li>
                     </ul>
-                    <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Buscar" />
-                        <button className="btn btn-outline-light" type="submit">Buscar</button>
-                    </form>
+                    <div className="navDerecha">
+                        <form className="d-flex">
+                            <input className="form-control me-2" type="search" placeholder="Buscar" />
+                            <button className="btn btn-outline-light" type="submit">Buscar</button>
+                        </form>
+
+                        <button className='text-light username btn'>{name}</button>
+                        <div className="row">
+                            <div className="col">
+                                <button className='btn btn-cerrar-sesion'
+                                onClick={handleLogout}>Cerrar Sesión</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav></div>

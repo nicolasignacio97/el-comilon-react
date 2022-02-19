@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from 'firebase/firestore/lite';
+import { getFirestore } from 'firebase/firestore';
+
 import {
     GoogleAuthProvider,
     FacebookAuthProvider,
@@ -8,7 +9,8 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    updateProfile 
+    updateProfile,
+    signInWithPopup,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -24,6 +26,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
 // const analytics = getAnalytics(app);
 
 
@@ -39,5 +42,6 @@ export {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    updateProfile 
+    updateProfile,
+    signInWithPopup,
 }

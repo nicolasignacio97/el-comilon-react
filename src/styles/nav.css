@@ -1,3 +1,40 @@
-.img{
+.img {
     width: 6rem;
+}
+
+.btn-cerrar-sesion {
+    color: #dfdfdf;
+    margin-left: 4rem;
+}
+
+.btn-cerrar-sesion:hover {
+    color: #ffff;
+}
+
+.navDerecha {
+    display: flex;
+}
+
+.username {
+    margin: 0 0 0 2rem;
+
+}
+
+.btn:focus {
+    border: 0px;
+}
+
+@media (max-width: 993px) {
+    .btn-cerrar-sesion {
+        margin: 0 0 1rem;
+        padding: 0;
+    }
+
+    .navDerecha {
+        flex-direction: column-reverse;
+    }
+
+    .username {
+        margin: 0 0 1rem;
+    }
 }

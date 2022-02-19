@@ -22,7 +22,7 @@ export const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     isFormValid();
-    dispatch(createUser(correo,contrasena,nombre))
+    dispatch(createUser(correo, contrasena, nombre))
   }
 
   const isFormValid = () => {
@@ -45,7 +45,7 @@ export const Register = () => {
     return true;
   }
 
-
+ 
   return (
     <div className='auth-card-login shadow animate__animated animate__fadeIn'>
       <div className="auth-form-login card-color">
