@@ -131,7 +131,7 @@ export const Register = () => {
       </div >
       <div className="auth-img-login card-color">
         <h3 className='titulo'>El Cólimlon</h3>
-        <h3 className='info '>Registrate en nuestra página para disfrutar de los mejores platos que tenemos disponibles</h3>
+        <h3 className='info '>Registrate en nuestra página y comienza a disfrutar de los mejores platos que tenemos disponibles</h3>
         <img className='img-login' src="/assets/img/registo.jpg" alt='img-login' />
       </div>
     </div >

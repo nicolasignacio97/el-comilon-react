@@ -12,7 +12,7 @@ import {
     signInWithPopup,
     db,
 } from "../firebase/firebase-config";
-import { existe } from "../helpers/existeUser";
+import { existe, rolAdmin } from "../helpers/existeUser";
 import { types } from "../types/types";
 
 export const guardarUsuario = async (uid, displayName, correo) => {
@@ -51,8 +51,11 @@ export const loginWithEmailAndPassword = (email, password) => {
     return (dispath) => {
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
-            .then(async ({ user }) => {
-                await dispath(login(user.uid, user.displayName))
+            .then(({ user }) => {
+                rolAdmin(user.uid)
+                    .then(async (rol) => {
+                        await dispath(login(user.uid, user.displayName, rol))
+                    })
             })
             .catch(err => {
                 Swal.fire({
@@ -83,29 +86,28 @@ export const loginConGoogle = () => {
 }
 
 export const loginConFacebook = () => {
-    return (dispath) => {
+    return () => {
         const auth = getAuth();
         signInWithPopup(auth, providerFacebook)
             .then(console.log)
     }
 }
 export const loginConTwitter = () => {
-    return (dispath) => {
+    return () => {
         const auth = getAuth();
         signInWithPopup(auth, providerTwitter)
             .then(console.log)
-
     }
 }
 
 
-
-export const login = (uid, displayName) => {
+export const login = (uid, displayName, rol) => {
     return {
         type: types.login,
         payload: {
             uid,
-            displayName
+            displayName,
+            rol
         }
     }
 };

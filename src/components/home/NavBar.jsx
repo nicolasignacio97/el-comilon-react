@@ -6,7 +6,7 @@ import { startLogout } from '../../actions/auth';
 
 export const NavBar = () => {
     const dispatch = useDispatch();
-    const { name } = useSelector(state => state.auth);
+    const { name, rol } = useSelector(state => state.auth);
     const handleLogout = () => {
         dispatch(startLogout())
     }
@@ -27,6 +27,11 @@ export const NavBar = () => {
                         <li className="nav-item">
                             <NavLink to="/perfil" className="nav-link" aria-current="page">Perfil</NavLink>
                         </li>
+                        {rol === 'admin' &&
+                            <li className="nav-item">
+                                <NavLink to="/admin/inicio" className="nav-link" aria-current="page">Administración</NavLink>
+                            </li>
+                        }
                     </ul>
                     <div className="navDerecha">
                         <form className="d-flex">
@@ -38,7 +43,7 @@ export const NavBar = () => {
                         <div className="row">
                             <div className="col">
                                 <button className='btn btn-cerrar-sesion'
-                                onClick={handleLogout}>Cerrar Sesión</button>
+                                    onClick={handleLogout}>Cerrar Sesión</button>
                             </div>
                         </div>
                     </div>

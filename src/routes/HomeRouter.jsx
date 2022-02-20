@@ -9,10 +9,9 @@ export const HomeRouter = () => {
         <>
             <NavBar />
             <Routes>
-                <Route path="/inicio" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/perfil" element={<ProfileUser />} />
-                <Route path='/*' element={<Navigate to="/inicio" />} />
-                
+                <Route path='/*' element={<Navigate to="/" />} /> 
             </Routes>
         </>
     )
