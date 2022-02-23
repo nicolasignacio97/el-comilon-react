@@ -7,4 +7,10 @@ export const types = {
     // loadinLogin
     uiStartLoading: '[UI] Start loading',
     uiFinishLoading: '[UI] Finish loading',
+    // loadinLogin
+    CrearPlato: '[PLATOS] Create',
+    LeerPLatos: '[PLATOS] Read',
+    ActualizarPlatos: '[PLATOS] Update',
+    EliminarPlatos: '[PLATOS] Delete',
+    SeleccionPlato: '[PLATOS] Seleccion',    
 }

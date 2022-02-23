@@ -21,6 +21,7 @@ export const MainRoutes = () => {
     const [isLoggedIn, setisLoggedIn] = useState(false);
     const { rol } = useSelector(state => state.auth);
 
+
     useEffect(() => {
         const auth = getAuth();
         onAuthStateChanged(auth, async (user) => {
@@ -34,7 +35,7 @@ export const MainRoutes = () => {
                 setisLoggedIn(false);
             }
             setTimeout(() => {
-                 setcheking(false);
+                setcheking(false);
             }, 1000);
         })
     }, [dispatch])

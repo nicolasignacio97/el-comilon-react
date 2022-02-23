@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import {doc, setDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
 import {
     providerFacebook,
@@ -99,7 +99,6 @@ export const loginConTwitter = () => {
             .then(console.log)
     }
 }
-
 
 export const login = (uid, displayName, rol) => {
     return {
