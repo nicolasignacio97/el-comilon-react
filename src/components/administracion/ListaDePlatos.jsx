@@ -24,7 +24,6 @@ export const ListaDePlatos = () => {
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Descripcíon</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Imagen</th>
                         <th scope="col">Acción</th>
@@ -36,8 +35,7 @@ export const ListaDePlatos = () => {
                         lista.map(plato => (
                             <tr key={plato.id} >
                                 <td>{plato.nombre}</td>
-                                <td>{plato.des}</td>
-                                <td>{plato.precio}</td>
+                                <td>{'$'}{plato.precio}</td>
                                 <td><img src={plato.fileURl} className='img-fluid img img-thumbnail' alt="img" /></td>
                                 <td>
                                     <i className="fa-solid fa-magnifying-glass p-2" type="button"

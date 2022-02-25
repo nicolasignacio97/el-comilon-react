@@ -15,10 +15,6 @@
     display: flex;
 }
 
-.username {
-    margin: 0 0 0 2rem;
-
-}
 
 .btn:focus {
     border: 0px;

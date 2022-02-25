@@ -12,5 +12,13 @@ export const types = {
     LeerPLatos: '[PLATOS] Read',
     ActualizarPlatos: '[PLATOS] Update',
     EliminarPlatos: '[PLATOS] Delete',
-    SeleccionPlato: '[PLATOS] Seleccion',    
+    SeleccionPlato: '[PLATOS] Seleccion',
+
+
+    // carrito
+    AgregarProducto: '[Carrito] Agregar',
+    EliminarProducto: '[Carrito] Eliminar',
+    Cantidad: '[Carrito] Cantidad',
+    FinalizarPedido: '[Carrito] Finalizar',
+
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { ActualizarPlatoDB } from '../../actions/platos';
 
 import { useForm } from '../../hooks/useForms';
 
@@ -10,9 +11,10 @@ import { useForm } from '../../hooks/useForms';
 
 export const FormActualizar = ({ state }) => {
 
-    let { nombre, des, fileURl, precio } = state
+    const { id, nombre, des, fileURl, precio } = state
 
     const dispatch = useDispatch();
+
     const [imge, setImg] = useState('')
 
     useEffect(() => {
@@ -20,19 +22,21 @@ export const FormActualizar = ({ state }) => {
     }, [fileURl])
 
     const [formValue, handleInputChange] = useForm({
-        Actnombre: '',
-        Actdesc: '',
-        Actprecio: '',
+        Actnombre: nombre,
+        Actdesc: des,
+        Actprecio: precio,
     })
-    let { Actnombre, Actdesc, Actprecio } = formValue;
-
-    Actnombre = nombre
-    Actdesc = des
-    Actprecio = precio
+    const { Actnombre, Actdesc, Actprecio } = formValue;
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        console.log('actualizar');
+        let file
+        if (e.target.form[0].files[0]) {
+            file = e.target.form[0].files[0];
+        } else {
+            file = fileURl
+        }
+        dispatch(ActualizarPlatoDB(id, Actnombre, Actdesc, Actprecio, file))
     }
 
     const handleImg = (e) => {
@@ -68,7 +72,7 @@ export const FormActualizar = ({ state }) => {
                             <label>Nombre</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input
+                            <textarea
                                 type="text"
                                 className="form-control"
                                 id="floatingPassword"

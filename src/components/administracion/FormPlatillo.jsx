@@ -10,7 +10,7 @@ export const FormPlatillo = () => {
     const [formValue, handleInputChange, reset] = useForm({
         nombre: '',
         desc: '',
-        precio: '',
+        precio: 0,
     })
     const { nombre, desc, precio } = formValue;
 
@@ -55,9 +55,9 @@ export const FormPlatillo = () => {
                             <label>Nombre</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input
+                            <textarea
                                 type="text"
-                                className="form-control"
+                                className="form-control h-25"
                                 id="floatingPassword"
                                 placeholder=" "
                                 name='desc'
@@ -68,7 +68,7 @@ export const FormPlatillo = () => {
                         </div>
                         <div className="form-floating mb-3">
                             <input
-                                type="numeber"
+                                type="number"
                                 className="form-control"
                                 id="floatingPassword"
                                 placeholder=" "

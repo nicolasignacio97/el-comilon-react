@@ -21,6 +21,13 @@ export const platos = (state = {}, action) => {
                 ...state,
                 actualizar: state.lista.filter(plato => plato.id === action.payload)
             }
+
+        case types.ActualizarPlatos:
+            return {
+                ...state,
+                actualizado: state.lista.filter(plato => plato.id === action.payload)
+            }
+        
         case types.EliminarPlatos:
             return {
                 ...state,

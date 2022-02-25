@@ -1,5 +1,5 @@
 import { types } from "../types/types"
-import { collection, addDoc, getDocs, deleteDoc, doc, getDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 import { fileUpload } from "../helpers/fileUpload";
@@ -30,13 +30,7 @@ export const CreatePlatoDB = (nombre, des, precio, url) => {
     }
 }
 
-export const startLoadingPlatos = () => {
-    return async (dispatch) => {
-        const platos = await LeerPlatosDB();
 
-        dispatch(leerPlatos(platos));
-    }
-}
 export const DeletePlatoDB = (id) => {
 
     return (dispatch) => {
@@ -64,6 +58,36 @@ export const DeletePlatoDB = (id) => {
     }
 }
 
+export const ActualizarPlatoDB = (idPlato, nombre, des, precio, fileUpd) => {
+    return async (dispatch) => {
+        Swal.fire({
+            title: 'Actualizando Plato',
+            html: 'Porfavor espere...',
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+        })
+        const fileURl = await fileUpload(fileUpd);
+        const data = {
+            nombre: nombre,
+            des: des,
+            fileURl: fileURl,
+            precio: precio
+        }
+        await setDoc(doc(db, "platos", idPlato), data);
+        dispatch(startLoadingPlatos())
+        Swal.close();
+    }
+}
+
+export const ActtualizarPLato = (idPlato) => {
+    return {
+        type: types.ActualizarPlatos,
+        payload: idPlato
+    }
+}
+
 export const SeleccionarPlato = (idPlato) => {
     return async (dispatch) => {
         dispatch(seleccion(idPlato))
@@ -83,6 +107,7 @@ export const deletePlato = (idPlato) => {
         payload: idPlato
     }
 }
+
 export const LeerPlatosDB = async () => {
 
     const platosSnapshot = await getDocs(collection(db, "platos"));
@@ -95,6 +120,13 @@ export const LeerPlatosDB = async () => {
     })
     return platos;
 
+}
+
+export const startLoadingPlatos = () => {
+    return async (dispatch) => {
+        const platos = await LeerPlatosDB();
+        dispatch(leerPlatos(platos));
+    }
 }
 
 export const leerPlatos = (platos) => {
