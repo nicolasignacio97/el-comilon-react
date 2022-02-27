@@ -6,12 +6,6 @@ export const carrito = (state = {}, action) => {
         case types.AgregarProducto:
             return {
                 carro: [...action.payload]
-                // id: action.payload.id,
-                // nombre: action.payload.nombre,
-                // precio: action.payload.precio,
-                // fileURl: action.payload.fileURl,
-                // cantidad: action.payload.cantidad,
-                // acomulado: action.payload.acomulado
             }
         case types.Cantidad:
             return {

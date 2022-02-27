@@ -8,7 +8,7 @@ export const InicioAdmin = () => {
   const state = useSelector(state => state.platos.actualizar) || false;
 
   return (
-    <div className="container">
+    <div className="container  animate__animated animate__fadeIn">
       <div className="row mt-5">
         <div className="col-lg-4 col-sm-12 mb-4">
           <div className="card shadow">

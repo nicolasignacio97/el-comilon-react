@@ -45,7 +45,7 @@ export const FormActualizar = ({ state }) => {
         setImg(imageUrl)
     }
     return (
-        <div>
+        <div className=' animate__animated animate__fadeIn'>
             <form onSubmit={handleUpdate}>
                 <div className="row m-3">
                     <div className="col">

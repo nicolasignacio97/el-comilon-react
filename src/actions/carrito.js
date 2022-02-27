@@ -1,9 +1,10 @@
 import { types } from "../types/types"
 
-const producto = [];
+let producto = [];
 
 export const AgregarAlCarro = (id, nombre, precio, fileURl) => {
     const existente = producto.find(producto => producto.id === id)
+
     return (dispatch) => {
         if (existente?.id === id) {
             dispatch(Cantidad(existente.cantidad++, existente.acomulado = existente.precio * existente.cantidad))
@@ -29,26 +30,26 @@ export const sumProducto = (id) => {
 }
 export const subProducto = (id) => {
     const existente = producto.find(producto => producto.id === id)
-
-
+    // const index = producto.findIndex((product) => product.id === existente.id)
 
     return (dispatch) => {
         if (existente.id === id) {
             dispatch(Cantidad(existente.acomulado = existente.acomulado - existente.precio, existente.cantidad--,))
         } if (existente.cantidad <= 0) {
             dispatch(EliminarProducto(existente.id))
-            console.log('entrando al metodo', producto)
-            producto.slice(produc => produc.id !== id)
-            console.log('borrando', producto)
-            console.log('saliendo', producto)
+            eliminarProductoDelArreglo(id);
         }
     }
 }
-
+export const eliminarProductoDelArreglo = (id) => {
+    producto = producto.filter((product) => {
+        return product.id !== id;
+    });
+}
 export const AgregarProducto = (producto) => {
     return {
         type: types.AgregarProducto,
-        payload: producto
+        payload: [...producto]
     }
 }
 
