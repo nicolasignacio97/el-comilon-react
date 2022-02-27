@@ -4,14 +4,21 @@ import { subProducto, sumProducto } from '../../actions/carrito';
 
 export const Carrito = () => {
     const dispatch = useDispatch();
-
     const productos = useSelector(state => state.carrito.carro) || [];
+
     const handleSum = (id) => {
         dispatch(sumProducto(id))
     }
     const handleSub = (id) => {
         dispatch(subProducto(id))
     }
+
+    const formatter = new Intl.NumberFormat('es-CH', {
+        style: 'currency',
+        currency: 'CLP',
+        minimumFractionDigits: 0
+    })
+
     return (
         <>
             <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -31,6 +38,9 @@ export const Carrito = () => {
                                         <div className="col-6 w-100">
                                             <h4 className='fs-6'>{producto.nombre}</h4>
                                         </div>
+                                        <div className="row">
+                                            <p className='text-center'>{formatter.format(parseInt(producto.acomulado))}</p>
+                                        </div>
                                         <div className="col-6 d-flex">
                                             <button className='btn btn-danger m-1'
                                                 onClick={() => handleSub(producto.id)}><i className="fa-solid fa-minus"></i></button>
@@ -39,9 +49,7 @@ export const Carrito = () => {
                                                 onClick={() => handleSum(producto.id)}><i className="fa-solid fa-plus"></i></button>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    {producto.precio}
+
                                 </div>
                             </div>
                         ))

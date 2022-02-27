@@ -5,18 +5,22 @@ export const carrito = (state = {}, action) => {
     switch (action.type) {
         case types.AgregarProducto:
             return {
-                ...state,
                 carro: [...action.payload]
+                // id: action.payload.id,
+                // nombre: action.payload.nombre,
+                // precio: action.payload.precio,
+                // fileURl: action.payload.fileURl,
+                // cantidad: action.payload.cantidad,
+                // acomulado: action.payload.acomulado
             }
         case types.Cantidad:
             return {
-                ...state,
-                carro: [...action.payload]
+                carro: [...state.carro]
             }
         case types.EliminarProducto:
             return {
-                ...state,
-                carro: state.carro.filter(plato => plato.id !== action.payload)
+                carro: state.carro.filter(
+                plato => plato.id !== action.payload)
             }
         default: return state;
     }

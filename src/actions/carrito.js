@@ -1,28 +1,26 @@
 import { types } from "../types/types"
-const producto = [];
-let cantidad = 1
 
-// console.log(seleccion.cantidad = seleccion.cantidad + 1)
+const producto = [];
 
 export const AgregarAlCarro = (id, nombre, precio, fileURl) => {
     const existente = producto.find(producto => producto.id === id)
     return (dispatch) => {
-        if (existente) {
-            dispatch(Cantidad(existente.cantidad++, existente.precio = existente.precio * existente.cantidad))
+        if (existente?.id === id) {
+            dispatch(Cantidad(existente.cantidad++, existente.acomulado = existente.precio * existente.cantidad))
         } else {
             producto.push({
-                id, nombre, precio, fileURl, cantidad
+                id, nombre, precio, fileURl, cantidad: 1, acomulado: precio
             })
-            dispatch(AgregarProducto(producto))
         }
+        dispatch(AgregarProducto(producto))
     }
 }
 
 export const sumProducto = (id) => {
     return (dispatch) => {
         const existente = producto.find(producto => producto.id === id)
-        if (existente) {
-            dispatch(Cantidad(existente.cantidad++, existente.precio = existente.precio * existente.cantidad))
+        if (existente.id === id) {
+            dispatch(Cantidad(existente.cantidad++, existente.acomulado = existente.precio * existente.cantidad))
         } else {
             return
         }
@@ -30,37 +28,33 @@ export const sumProducto = (id) => {
     }
 }
 export const subProducto = (id) => {
+    const existente = producto.find(producto => producto.id === id)
+
+
+
     return (dispatch) => {
-        const existente = producto.find(producto => producto.id === id)
-        if (existente) {
-            dispatch(Cantidad(existente.precio = existente.precio / existente.cantidad, existente.cantidad--,))
-            if (existente.cantidad === 0) {
-                dispatch(Eliminar(existente.id))
-            }
-        } else {
-            return
+        if (existente.id === id) {
+            dispatch(Cantidad(existente.acomulado = existente.acomulado - existente.precio, existente.cantidad--,))
+        } if (existente.cantidad <= 0) {
+            dispatch(EliminarProducto(existente.id))
+            console.log('entrando al metodo', producto)
+            producto.slice(produc => produc.id !== id)
+            console.log('borrando', producto)
+            console.log('saliendo', producto)
         }
-    }
-}
-
-export const Cantidad = () => {
-    return {
-        type: types.Cantidad,
-        payload: [...producto]
-    }
-}
-
-
-export const Eliminar = (id) => {
-    return (dispatch) => {
-        dispatch(EliminarProducto(id))
     }
 }
 
 export const AgregarProducto = (producto) => {
     return {
         type: types.AgregarProducto,
-        payload: [...producto]
+        payload: producto
+    }
+}
+
+export const Cantidad = () => {
+    return {
+        type: types.Cantidad
     }
 }
 
@@ -69,4 +63,5 @@ export const EliminarProducto = (id) => {
         type: types.EliminarProducto,
         payload: id
     }
+
 }
