@@ -18,3 +18,8 @@
 .finalizar{
     width: 15rem;
 }
+
+.over{
+    height: 19rem;
+    overflow: auto;
+}

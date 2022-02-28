@@ -14,7 +14,7 @@ export const carrito = (state = {}, action) => {
         case types.EliminarProducto:
             return {
                 carro: state.carro.filter(
-                plato => plato.id !== action.payload)
+                    plato => plato.id !== action.payload)
             }
         default: return state;
     }
