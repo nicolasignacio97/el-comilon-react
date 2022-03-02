@@ -1,6 +1,6 @@
 export const types = {
-    login: '[auth] Login',
-    Logout: '[auth] Logout',
+    login: '[Auth] Login',
+    Logout: '[Auth] Logout',
     // errors
     uiSetError: '[UI] Set Error',
     uiRemoveError: '[UI] Remove Error',
@@ -8,11 +8,11 @@ export const types = {
     uiStartLoading: '[UI] Start loading',
     uiFinishLoading: '[UI] Finish loading',
     // loadinLogin
-    CrearPlato: '[PLATOS] Create',
-    LeerPLatos: '[PLATOS] Read',
-    ActualizarPlatos: '[PLATOS] Update',
-    EliminarPlatos: '[PLATOS] Delete',
-    SeleccionPlato: '[PLATOS] Seleccion',
+    CrearPlato: '[Platos] Create',
+    LeerPLatos: '[Platos] Read',
+    ActualizarPlatos: '[Platos] Update',
+    EliminarPlatos: '[Platos] Delete',
+    SeleccionPlato: '[Platos] Seleccion',
 
 
     // carrito
@@ -20,5 +20,13 @@ export const types = {
     EliminarProducto: '[Carrito] Eliminar',
     Cantidad: '[Carrito] Cantidad',
     FinalizarPedido: '[Carrito] Finalizar',
+    limpiarCarro: '[Carrito] Limpiar',
+
+    // perfil
+    leerDatos: '[Perfil] leer Perfil',
+    ActDatos: '[Perfil] Actualizar Perfil',
+
+    // pedidos
+    leerPedidos: '[Pedidos] leer Pedidos',
 
 }

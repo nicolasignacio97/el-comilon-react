@@ -16,6 +16,8 @@ export const carrito = (state = {}, action) => {
                 carro: state.carro.filter(
                     plato => plato.id !== action.payload)
             }
+        case types.limpiarCarro:
+            return { carro: [] }
         default: return state;
     }
 

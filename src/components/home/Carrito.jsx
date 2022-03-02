@@ -8,7 +8,7 @@ export const Carrito = () => {
     const dispatch = useDispatch();
     const productos = useSelector(state => state.carrito.carro) || [];
     const [precioFinal, setprecioFinal] = useState()
-    const Ptotal = productos.map(({ acomulado }) => (parseInt(acomulado)))
+    const Ptotal = productos.map(({ acumulado }) => (parseInt(acumulado)))
     const handleSum = (id) => {
         dispatch(sumProducto(id))
     }
@@ -43,7 +43,7 @@ export const Carrito = () => {
                                             </div>
                                             <div className="row">
                                                 <div className="col-6"><p>Precio: </p></div>
-                                                <div className="col-6"><p className='text-center text-danger'>{formatter(producto.acomulado)}</p></div>
+                                                <div className="col-6"><p className='text-center text-danger'>{formatter(producto.acumulado)}</p></div>
                                             </div>
                                             <div className="col-6 d-flex">
                                                 <button className='btn btn-danger m-1'

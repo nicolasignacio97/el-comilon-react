@@ -1,25 +1,66 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { subProducto, sumProducto } from '../../actions/carrito';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { limpiarCarro, subProducto, sumProducto } from '../../actions/carrito';
 import { FinalizarPedidoBD } from '../../actions/finalizarPedido';
+import { LeerPedidos } from '../../actions/pedidos';
+import { removeError, setError } from '../../actions/ui';
 import { formatter } from '../../helpers/moneda';
+import { useForm } from '../../hooks/useForms';
 
 export const FinalizarCompra = () => {
-
+  let sinProductos = true
   const dispatch = useDispatch();
   const productos = useSelector(state => state.carrito.carro) || [];
+  const { msgError } = useSelector(state => state.UI);
+  const { uid } = useSelector(state => state.auth);
   const [precioFinal, setprecioFinal] = useState()
-  const Ptotal = productos.map(({ acomulado }) => (parseInt(acomulado)))
+  const Ptotal = productos.map(({ acumulado }) => (parseInt(acumulado)))
+  const navigate = useNavigate();
+  const { direccion } = useSelector(state => state.perfil);
+
+
+  if (productos.length > 0) {
+    sinProductos = false
+  }
+
+  const [formValue, handleInputChange] = useForm({
+    udireccion: direccion || '',
+  });
+
+  const { udireccion } = formValue;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isFormValid()) {
+      dispatch(FinalizarPedidoBD(direccion, precioFinal))
+      navigate('/perfil/mis_pedios')
+      dispatch(limpiarCarro())
+      dispatch(LeerPedidos(uid))
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Pedido Realizado',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+  }
+  const isFormValid = () => {
+    if (direccion.trim().length <= 0) {
+      dispatch(setError('La dirección es requerida'))
+      return false;
+    }
+    dispatch(removeError());
+    return true;
+  }
 
   const handleSum = (id) => {
     dispatch(sumProducto(id))
   }
   const handleSub = (id) => {
     dispatch(subProducto(id))
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(FinalizarPedidoBD('Quilpue', precioFinal))
   }
 
   useEffect(() => {
@@ -42,11 +83,16 @@ export const FinalizarCompra = () => {
                       type="text"
                       className='form-control'
                       placeholder=" "
+                      name='udireccion'
+                      value={udireccion}
+                      onChange={handleInputChange}
                     />
                     <label>Dirección</label>
+                    {msgError &&
+                      <p className='text-danger m-0'>{msgError}</p>
+                    }
                   </div>
                 </div>
-                <hr />
                 <h3 className='text-muted'>Tu orden</h3>
                 <div className="row over">
                   <table className="table table-borderless">
@@ -63,17 +109,17 @@ export const FinalizarCompra = () => {
                               <div className="row">
                                 <div className="col-6 d-flex justify-content-evenly ">
                                   <img className='img-fluid w-50' src={producto.fileURl} alt={producto.nombre} />
-                                  <p> Precio : <span className='text-danger'>{formatter(producto.acomulado)}</span></p>
+                                  <p> Precio : <span className='text-danger'>{formatter(producto.acumulado)}</span></p>
                                 </div>
                                 <div className="col-6">
                                   <p>{producto.nombre}</p>
                                   <div className="row">
                                     <div className="col-6 d-flex">
                                       <button className='btn btn-danger m-1'
-                                        onClick={() => handleSub(producto.id)}><i className="fa-solid fa-minus"></i></button>
+                                        onClick={() => handleSub(producto.id)} type="button"><i className="fa-solid fa-minus"></i></button>
                                       <button className='btn' disabled>{producto.cantidad}</button>
                                       <button className='btn btn-danger m-1'
-                                        onClick={() => handleSum(producto.id)}><i className="fa-solid fa-plus"></i></button>
+                                        onClick={() => handleSum(producto.id)} type="button"><i className="fa-solid fa-plus"></i></button>
                                     </div>
                                   </div>
                                 </div>
@@ -93,7 +139,9 @@ export const FinalizarCompra = () => {
                 </div>
                 <div className="col-6">
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button className="btn btn-outline-danger " type="submit">Finalizar</button>
+                    <button className="btn btn-outline-danger" type="submit"
+                      disabled={sinProductos}
+                    >Finalizar</button>
                   </div>
                 </div>
               </div>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { DeletePlatoDB, SeleccionarPlato } from '../../actions/platos';
 import { startLoadingPlatos } from '../../actions/platos';
+import { formatter } from '../../helpers/moneda';
 
 
 export const ListaDePlatos = () => {
@@ -35,13 +36,14 @@ export const ListaDePlatos = () => {
                         lista.map(plato => (
                             <tr key={plato.id} >
                                 <td>{plato.nombre}</td>
-                                <td>{'$'}{plato.precio}</td>
+                                <td>{formatter(plato.precio)}</td>
                                 <td><img src={plato.fileURl} className='img-fluid img img-thumbnail' alt="img" /></td>
                                 <td>
                                     <i className="fa-solid fa-magnifying-glass p-2" type="button"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        style={{ 'color': 'green', 'cursor': 'pointer' }}
+                                        style={{ 'color': 'grey', 'cursor': 'pointer' }}
                                         onClick={() => handleDetail(plato.id)}></i>
+
                                     <i className="fa-solid fa-trash" style={{ 'color': 'red', 'cursor': 'pointer' }}
                                         onClick={() => handleDelete(plato.id)}></i>
                                 </td>

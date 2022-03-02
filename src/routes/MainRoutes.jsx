@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Routes, Route, BrowserRouter, Navigate, } from "react-router-dom";
 import { login } from "../actions/auth";
+import { LeerPedidos } from "../actions/pedidos";
+import { LeerDatos } from "../actions/perfil";
 import { Loading } from "../components/home/Loading";
 import { rolAdmin } from "../helpers/existeUser";
 
@@ -16,11 +18,11 @@ import { PrivateRote } from "./PrivateRote";
 import { PublicRoute } from "./PublicRoute";
 
 export const MainRoutes = () => {
+
     const dispatch = useDispatch();
     const [cheking, setcheking] = useState(true);
     const [isLoggedIn, setisLoggedIn] = useState(false);
     const { rol } = useSelector(state => state.auth);
-
 
     useEffect(() => {
         const auth = getAuth();
@@ -29,6 +31,8 @@ export const MainRoutes = () => {
                 rolAdmin(user?.uid)
                     .then((rol) => {
                         dispatch(login(user.uid, user.displayName, rol));
+                        dispatch(LeerDatos(user.uid))
+                        dispatch(LeerPedidos(user.uid))
                     })
                 setisLoggedIn(true);
             } else {
@@ -36,7 +40,7 @@ export const MainRoutes = () => {
             }
             setTimeout(() => {
                 setcheking(false);
-            }, 1000);
+            }, 1500);
         })
     }, [dispatch])
 
@@ -66,11 +70,6 @@ export const MainRoutes = () => {
                         <HomeRouter />
                     </PrivateRote>
                 } />
-
-                {/* 
-                {Admin &&
-                
-                } */}
 
                 <Route path='/*' element={<Navigate to="/" />} />
             </Routes>

@@ -73,7 +73,6 @@ export const FormPlatillo = () => {
                                 id="floatingPassword"
                                 placeholder=" "
                                 name='precio'
-                                value={precio}
                                 onChange={handleInputChange}
                             />
                             <label>Precio</label>

@@ -9,7 +9,7 @@ export const AdminRoutes = () => {
     return (
         <div >
             <NavBar />
-            <Carrito />
+            <Carrito /> 
             <Routes>
                 <Route path="/inicio" element={<InicioAdmin />} />
                 <Route path='/*' element={<Navigate to="/admin/inicio" />} />

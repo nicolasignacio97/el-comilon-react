@@ -13,8 +13,8 @@ export const FinalizarPedidoBD = (direccion, total) => {
             }
         }
         try {
-            const docRef = await addDoc(collection(db, `users/${uid}/pedidos`), nuevoPedido);
-            console.log("Document written with ID: ", docRef.id);
+            await addDoc(collection(db, `users/${uid}/pedidos`), nuevoPedido);
+
         } catch (e) {
             console.error("Error adding document: ", e);
         }

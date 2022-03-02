@@ -36,10 +36,7 @@ export const NavBar = () => {
                         <button className='text-light username btn text-start p-0'>{name}</button>
                     </ul>
                     <div className="navDerecha">
-                        {/* <form className="d-flex">
-                            <input className="form-control me-2" type="search" placeholder="Buscar" />
-                            <button className="btn btn-outline-light" type="submit">Buscar</button>
-                        </form> */}
+
                         <button
                             className="btn btn-outline-danger text-start fs-5"
                             style={{ 'color': 'white' }}

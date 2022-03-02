@@ -9,17 +9,23 @@
 }
 
 .btnFinalizar {
-    display: block;
-    width: 23rem;
+    
+    width: 13rem;
     height: 2rem;
     background: none;
     opacity: 100;
 }
-.finalizar{
-    width: 15rem;
+
+.finalizar {
+    width: 23rem;
 }
 
-.over{
+.over {
     height: 19rem;
     overflow: auto;
+}
+
+.list-group-item.active {
+    background-color: #dc3545;
+    border-color: #dc3545;
 }
