@@ -8,7 +8,6 @@ import { Loading } from './Loading';
 export const Home = () => {
   const dispatch = useDispatch();
   const { lista } = useSelector(state => state.platos);
-
   useEffect(() => {
     dispatch(startLoadingPlatos());
   }, [dispatch]);

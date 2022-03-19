@@ -5,6 +5,8 @@ import { ActualizarPlatoDB } from '../../actions/platos';
 import { useForm } from '../../hooks/useForms';
 
 export const FormActualizar = ({ state }) => {
+ 
+
 
     const { id, nombre, des, fileURl, precio } = state
 

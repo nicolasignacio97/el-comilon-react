@@ -8,6 +8,7 @@ import { formatter } from '../../helpers/moneda';
 export const ListaDePlatos = () => {
 
     const dispatch = useDispatch();
+    
     const { lista } = useSelector(state => state.platos);
     useEffect(() => {
         dispatch(startLoadingPlatos());
@@ -19,6 +20,7 @@ export const ListaDePlatos = () => {
     const handleDetail = (id) => {
         dispatch(SeleccionarPlato(id))
     }
+
     return (
         <>
             <table className="table table-hover table-borderless table-responsive overflow-scroll">

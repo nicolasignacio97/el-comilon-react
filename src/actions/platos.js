@@ -77,6 +77,7 @@ export const ActualizarPlatoDB = (idPlato, nombre, des, precio, fileUpd) => {
         }
         await setDoc(doc(db, "platos", idPlato), data);
         dispatch(startLoadingPlatos())
+        dispatch(limpiar())
         Swal.close();
     }
 }
@@ -89,7 +90,7 @@ export const ActtualizarPLato = (idPlato) => {
 }
 
 export const SeleccionarPlato = (idPlato) => {
-    return async (dispatch) => {
+    return  (dispatch) => {
         dispatch(seleccion(idPlato))
     }
 }
@@ -133,6 +134,12 @@ export const leerPlatos = (platos) => {
     return {
         type: types.LeerPLatos,
         payload: [...platos]
+    }
+}
+
+export const limpiar = () => {
+    return {
+        type:types.limpiar
     }
 }
 

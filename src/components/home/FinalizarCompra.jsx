@@ -31,10 +31,19 @@ export const FinalizarCompra = () => {
 
   const { udireccion } = formValue;
 
+  const isFormValid = () => {
+    if (udireccion.trim().length <= 0) {
+      dispatch(setError('La dirección es requerida'))
+      return false;
+    } else {
+      dispatch(removeError());
+      return true;
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isFormValid()) {
-      dispatch(FinalizarPedidoBD(direccion, precioFinal))
+      dispatch(FinalizarPedidoBD(udireccion, precioFinal))
       navigate('/perfil/mis_pedios')
       dispatch(limpiarCarro())
       dispatch(LeerPedidos(uid))
@@ -46,15 +55,9 @@ export const FinalizarCompra = () => {
         timer: 1500
       })
     }
+
   }
-  const isFormValid = () => {
-    if (direccion.trim().length <= 0) {
-      dispatch(setError('La dirección es requerida'))
-      return false;
-    }
-    dispatch(removeError());
-    return true;
-  }
+
 
   const handleSum = (id) => {
     dispatch(sumProducto(id))

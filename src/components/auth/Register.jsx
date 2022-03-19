@@ -21,16 +21,15 @@ export const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    isFormValid();
-    dispatch(createUser(correo, contrasena, nombre))
+    if (isFormValid()) {
+      dispatch(createUser(correo, contrasena, nombre))
+    }
   }
 
   const isFormValid = () => {
-
     if (nombre.trim().length <= 0) {
       dispatch(setError('El nombre es requerido'))
       return false;
-
     } else if (!validator.isEmail(correo)) {
 
       dispatch(setError('El correo no es valido'))
@@ -45,7 +44,7 @@ export const Register = () => {
     return true;
   }
 
- 
+
   return (
     <div className='auth-card-login shadow animate__animated animate__fadeIn'>
       <div className="auth-form-login card-color">

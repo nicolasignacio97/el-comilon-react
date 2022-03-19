@@ -14,7 +14,7 @@ export const NavBar = () => {
     return (
         <div><nav className="navbar navbar-expand-lg navbar-dark bg-danger">
             <div className="container-fluid">
-                <NavLink to="#" className="navbar-brand">
+                <NavLink to="/" className="navbar-brand">
                     <img className='img' src="/assets/img/logo-admin.png" alt='img-login' />
                 </NavLink>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,12 +28,15 @@ export const NavBar = () => {
                         <li className="nav-item">
                             <NavLink to="/perfil" className="nav-link" aria-current="page">Perfil</NavLink>
                         </li>
+
                         {rol === 'admin' &&
                             <li className="nav-item">
                                 <NavLink to="/admin/inicio" className="nav-link" aria-current="page">Administración</NavLink>
                             </li>
                         }
-                        <button className='text-light username btn text-start p-0'>{name}</button>
+                        <li className="nav-item">
+                            <NavLink to="/user" className="nav-link ">{name}</NavLink>
+                        </li>
                     </ul>
                     <div className="navDerecha">
 

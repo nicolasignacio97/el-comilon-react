@@ -27,13 +27,16 @@ export const platos = (state = {}, action) => {
                 ...state,
                 actualizado: state.lista.filter(plato => plato.id === action.payload)
             }
-        
+
         case types.EliminarPlatos:
             return {
                 ...state,
                 lista: state.lista.filter(plato => plato.id !== action.payload)
             }
         case types.Logout:
+            return {}
+            
+        case types.limpiar:
             return {}
 
         default:

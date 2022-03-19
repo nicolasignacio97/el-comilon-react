@@ -15,6 +15,7 @@ export const FinalizarPedidoBD = (direccion, total) => {
         try {
             await addDoc(collection(db, `users/${uid}/pedidos`), nuevoPedido);
 
+
         } catch (e) {
             console.error("Error adding document: ", e);
         }
