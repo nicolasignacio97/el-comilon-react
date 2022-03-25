@@ -76,11 +76,7 @@ export const loginConGoogle = () => {
                 dispath(login(user.uid, user.displayName))
             })
             .catch(err => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: err,
-                })
+             console.log(err)
             })
     }
 }

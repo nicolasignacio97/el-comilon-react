@@ -7,8 +7,8 @@ import { useForm } from '../../hooks/useForms'
 export const Login = () => {
   const dispatch = useDispatch();
   const [formValue, handleInpurtChange] = useForm({
-    correo: 'nicolas@gmail.com',
-    contraseña: '123456'
+    correo: '',
+    contraseña: ''
   });
   const { correo, contraseña } = formValue;
 

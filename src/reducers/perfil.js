@@ -15,6 +15,10 @@ export const perfil = (state = {}, action) => {
                 correo: action.payload.correo,
                 direccion: action.payload.direccion,
             }
+        case types.cerrarSesion:
+            return {
+                
+            }
         default:
             return state;
     }

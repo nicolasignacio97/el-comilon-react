@@ -3,13 +3,15 @@ import '../../styles/nav.css'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth';
+import { LimpiarSesion } from '../../actions/perfil';
 
 export const NavBar = () => {
     const dispatch = useDispatch();
     const { name, rol } = useSelector(state => state.auth);
 
     const handleLogout = () => {
-        dispatch(startLogout())
+        dispatch(startLogout());
+        dispatch(LimpiarSesion())
     }
     return (
         <div><nav className="navbar navbar-expand-lg navbar-dark bg-danger">

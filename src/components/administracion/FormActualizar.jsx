@@ -4,26 +4,19 @@ import { ActualizarPlatoDB } from '../../actions/platos';
 
 import { useForm } from '../../hooks/useForms';
 
+const inicialState = {
+    nombre: '',
+    des: '',
+    precio: '',
+}
 export const FormActualizar = ({ state }) => {
- 
 
-
-    const { id, nombre, des, fileURl, precio } = state
-
+    const { id, fileURl } = state
     const dispatch = useDispatch();
-
     const [imge, setImg] = useState('')
 
-    useEffect(() => {
-        setImg(fileURl)
-    }, [fileURl])
-
-    const [formValue, handleInputChange] = useForm({
-        Actnombre: nombre,
-        Actdesc: des,
-        Actprecio: precio,
-    })
-    const { Actnombre, Actdesc, Actprecio } = formValue;
+    const [formValue, handleInputChange, setValues] = useForm(inicialState)
+    const { nombre, des, precio } = formValue;
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -33,8 +26,12 @@ export const FormActualizar = ({ state }) => {
         } else {
             file = fileURl
         }
-        dispatch(ActualizarPlatoDB(id, Actnombre, Actdesc, Actprecio, file))
+        dispatch(ActualizarPlatoDB(id, nombre, des, precio, file))
     }
+    useEffect(() => {
+        setImg(fileURl)
+        setValues(state)
+    }, [fileURl,setValues])
 
     const handleImg = (e) => {
         const imageFile = e.target.files[0];
@@ -62,8 +59,8 @@ export const FormActualizar = ({ state }) => {
                                 className="form-control"
                                 id="floatingPassword"
                                 placeholder=" "
-                                name='Actnombre'
-                                value={Actnombre}
+                                name='nombre'
+                                value={nombre}
                                 onChange={handleInputChange}
                             />
                             <label>Nombre</label>
@@ -74,8 +71,8 @@ export const FormActualizar = ({ state }) => {
                                 className="form-control"
                                 id="floatingPassword"
                                 placeholder=" "
-                                name='Actdesc'
-                                value={Actdesc}
+                                name='des'
+                                value={des}
                                 onChange={handleInputChange}
                             />
                             <label>Descripción</label>
@@ -86,8 +83,8 @@ export const FormActualizar = ({ state }) => {
                                 className="form-control"
                                 id="floatingPassword"
                                 placeholder=" "
-                                name='Actprecio'
-                                value={Actprecio}
+                                name='precio'
+                                value={precio}
                                 onChange={handleInputChange}
                             />
                             <label>Precio</label>

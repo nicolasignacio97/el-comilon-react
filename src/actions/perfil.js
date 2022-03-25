@@ -54,3 +54,6 @@ export const actializarDatos = (nombre, correo, direccion) => {
         }
     }
 }
+
+
+export const LimpiarSesion = () => ({ type: types.cerrarSesion })

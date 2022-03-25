@@ -11,10 +11,10 @@ export const Register = () => {
   const { msgError } = useSelector(state => state.UI);
 
   const [formValue, handleInputChange] = useForm({
-    nombre: 'nicolas',
-    correo: 'nicolas@gmail.com',
-    contrasena: '123456',
-    contrasena2: '123456'
+    nombre: '',
+    correo: '',
+    contrasena: '',
+    contrasena2: ''
   });
 
   const { nombre, correo, contrasena, contrasena2 } = formValue;
