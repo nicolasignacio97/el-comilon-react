@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 import { ActualizarPlatoDB } from '../../actions/platos';
 
 import { useForm } from '../../hooks/useForms';
@@ -14,7 +15,7 @@ export const FormActualizar = ({ state }) => {
     const { id, fileURl } = state
     const dispatch = useDispatch();
     const [imge, setImg] = useState('')
-
+    const [blockeo, setblockeo] = useState(false)
     const [formValue, handleInputChange, setValues] = useForm(inicialState)
     const { nombre, des, precio } = formValue;
 
@@ -26,12 +27,22 @@ export const FormActualizar = ({ state }) => {
         } else {
             file = fileURl
         }
+
         dispatch(ActualizarPlatoDB(id, nombre, des, precio, file))
     }
+
+    useEffect(() => {
+        if (!nombre || !des || !precio) {
+            setblockeo(true)
+        } else {
+            setblockeo(false)
+        }
+    }, [formValue])
+
     useEffect(() => {
         setImg(fileURl)
         setValues(state)
-    }, [fileURl,setValues])
+    }, [fileURl, setValues])
 
     const handleImg = (e) => {
         const imageFile = e.target.files[0];
@@ -93,9 +104,14 @@ export const FormActualizar = ({ state }) => {
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                 <button type="button" className="btn btn-danger"
-                                    onClick={handleUpdate} data-bs-dismiss="modal">Guardar Cambios</button>
+                                    onClick={handleUpdate} data-bs-dismiss="modal" disabled={blockeo}>Guardar Cambios</button>
                             </div>
                         </div>
+                        {   blockeo&&
+                            <div className="alert alert-danger text-center" role="alert">
+                                Todos los campos son obligatorios
+                            </div>
+                        }
                     </div>
                 </div>
             </form>

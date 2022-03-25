@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 import { CreatePlatoDB } from '../../actions/platos';
 import { useForm } from '../../hooks/useForms';
 
@@ -7,7 +8,7 @@ export const FormPlatillo = () => {
 
     const dispatch = useDispatch();
     const [imge, setImg] = useState('')
-    const [formValue, handleInputChange, reset] = useForm({
+    const [formValue, handleInputChange, , reset] = useForm({
         nombre: '',
         desc: '',
         precio: 0,
@@ -16,6 +17,22 @@ export const FormPlatillo = () => {
 
     const handleCreate = (e) => {
         e.preventDefault();
+        if (!e.target[0].files[0]) {
+            Swal.fire('Error', 'La imagen es obligatoria', 'error')
+            return;
+        }
+        if (!nombre) {
+            Swal.fire('Error', 'El nombre es obligatorio', 'error')
+            return;
+        }
+        if (!desc) {
+            Swal.fire('Error', 'La descripción es obligatoria', 'error')
+            return;
+        }
+        if (!precio) {
+            Swal.fire('Error', 'El precio es obligatorio', 'error')
+            return;
+        }
         dispatch(CreatePlatoDB(nombre, desc, precio, e.target[0].files[0]))
         reset();
         setImg('');

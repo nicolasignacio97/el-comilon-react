@@ -77,7 +77,6 @@ export const ActualizarPlatoDB = (idPlato, nombre, des, precio, fileUpd) => {
         }
         await setDoc(doc(db, "platos", idPlato), data);
         dispatch(startLoadingPlatos())
-        dispatch(limpiar())
         Swal.close();
     }
 }
