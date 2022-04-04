@@ -15,7 +15,7 @@ export const existe = async (uid) => {
 export const rolAdmin = async (uid = 'kjsdkjfd') => {
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);
-    const rol = docSnap.data().role;
+    const rol = docSnap.data();
     return rol
 }
 

@@ -23,18 +23,21 @@ export const MainRoutes = () => {
     const [cheking, setcheking] = useState(true);
     const [isLoggedIn, setisLoggedIn] = useState(false);
     const { rol } = useSelector(state => state.auth);
+    const { uid } = useSelector(state => state.auth);
 
     useEffect(() => {
         const auth = getAuth();
         onAuthStateChanged(auth, async (user) => {
             if (user?.uid) {
-                rolAdmin(user?.uid)
+                await rolAdmin(user?.uid)
                     .then((rol) => {
                         dispatch(login(user.uid, user.displayName, rol));
-                        dispatch(LeerDatos(user.uid))
+                  
                         dispatch(LeerPedidos(user.uid))
+                        dispatch(LeerDatos(uid))
                     })
                 setisLoggedIn(true);
+
             } else {
                 setisLoggedIn(false);
             }
@@ -42,7 +45,10 @@ export const MainRoutes = () => {
                 setcheking(false);
             }, 1500);
         })
-    }, [dispatch])
+    }, [dispatch, uid])
+
+
+
 
     if (cheking) {
         return (

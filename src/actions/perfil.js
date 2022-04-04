@@ -4,12 +4,12 @@ import { db } from "../firebase/firebase-config";
 import { types } from "../types/types";
 
 
-export const LeerDatos = (uid) => {
+export const LeerDatos = (uid = 'asd') => {
     return async (dispath) => {
         const docRef = doc(db, "users", uid);
         const docSnap = await getDoc(docRef);
-        const { correo, nombre, direccion } = docSnap.data();
-        await dispath(obtenerDatos(nombre, correo, direccion))
+        const data = docSnap.data();
+        dispath(obtenerDatos(data.nombre, data.correo, data.direccion))
     }
 }
 export const ActualizarDatos = (nombre, correo, direccion) => {

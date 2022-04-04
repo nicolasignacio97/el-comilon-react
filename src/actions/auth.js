@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import {doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
 import {
     providerFacebook,
@@ -61,7 +61,7 @@ export const loginWithEmailAndPassword = (email, password) => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Correo o Contrseña Invalido',
+                    text: 'Correo y/o Contrseña son incorrectos',
                 })
             });
     }
@@ -76,7 +76,7 @@ export const loginConGoogle = () => {
                 dispath(login(user.uid, user.displayName))
             })
             .catch(err => {
-             console.log(err)
+                console.log(err)
             })
     }
 }
@@ -97,12 +97,13 @@ export const loginConTwitter = () => {
 }
 
 export const login = (uid, displayName, rol) => {
+
     return {
         type: types.login,
         payload: {
             uid,
             displayName,
-            rol
+            rol:rol.role
         }
     }
 };

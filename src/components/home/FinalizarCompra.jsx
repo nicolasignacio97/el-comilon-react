@@ -20,6 +20,7 @@ export const FinalizarCompra = () => {
   const navigate = useNavigate();
   const { direccion } = useSelector(state => state.perfil);
 
+  const [isInValid, setisInValid] = useState(false);
 
   if (productos.length > 0) {
     sinProductos = false
@@ -34,8 +35,10 @@ export const FinalizarCompra = () => {
   const isFormValid = () => {
     if (udireccion.trim().length <= 0) {
       dispatch(setError('La dirección es requerida'))
+      setisInValid(true);
       return false;
     } else {
+      setisInValid(false);
       dispatch(removeError());
       return true;
     }
@@ -68,7 +71,7 @@ export const FinalizarCompra = () => {
 
   useEffect(() => {
     setprecioFinal(Ptotal.reduce((partialSum, a) => partialSum + a, 0));
-  }, [productos])
+  }, [productos, Ptotal])
 
   return (
     <form onSubmit={handleSubmit}>
@@ -84,7 +87,7 @@ export const FinalizarCompra = () => {
                   <div className="form-floating mb-3">
                     <input
                       type="text"
-                      className='form-control'
+                      className={`form-control ${isInValid ? 'is-invalid' : ' '}`}
                       placeholder=" "
                       name='udireccion'
                       value={udireccion}

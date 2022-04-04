@@ -27,6 +27,7 @@ export const types = {
 
     // perfil
     leerDatos: '[Perfil] leer Perfil',
+    
     ActDatos: '[Perfil] Actualizar Perfil',
     cerrarSesion:'[Perfil] Cerrar Sesion',
 
