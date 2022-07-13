@@ -103,7 +103,7 @@ export const Login = () => {
         </div>
       </div >
       <div className="auth-img-login card-color">
-        <h3 className='titulo'>El Cólimlon</h3>
+        <h3 className='titulo'>El Cómilon</h3>
         <h3 className='info'>Inicia sesión y comienza disfrutar de los mejores platos disponibles para ti</h3>
         <img className='img-login' src="/assets/img/img-login.jpg" alt='img-login' />
       </div>
